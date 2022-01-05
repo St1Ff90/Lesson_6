@@ -6,27 +6,27 @@ namespace ProjLibrary
 {
     public class TwoDimensionalArray
     {
-        public static int FindMinElement_1(int[,] arr)
+        public static int FindMinElement(int[,] arr)
         {
             if (arr == null || arr.Length == 0)
             {
                 throw new ArgumentNullException("Array is empty");
             }
 
-            return arr[FindMinIndex_3(arr).i, FindMinIndex_3(arr).j]; ;
+            return arr[FindMinIndex(arr).i, FindMinIndex(arr).j]; ;
         }
 
-        public static int FindMaxElement_2(int[,] arr)
+        public static int FindMaxElement(int[,] arr)
         {
             if (arr == null || arr.Length == 0)
             {
                 throw new ArgumentNullException("Array is empty");
             }
             
-            return arr[FindMaxIndex_4(arr).i, FindMaxIndex_4(arr).j];
+            return arr[FindMaxIndex(arr).i, FindMaxIndex(arr).j];
         }
 
-        public static (int i, int j) FindMinIndex_3(int[,] arr)
+        public static (int i, int j) FindMinIndex(int[,] arr)
         {
             if (arr == null || arr.Length == 0)
             {
@@ -50,7 +50,7 @@ namespace ProjLibrary
             return result;
         }
 
-        public static (int i, int j) FindMaxIndex_4(int[,] arr)
+        public static (int i, int j) FindMaxIndex(int[,] arr)
         {
             if (arr == null || arr.Length == 0)
             {
@@ -74,7 +74,7 @@ namespace ProjLibrary
             return result;
         }
 
-        public static int CompaneNeighbors_5(int[,] arr)
+        public static int CompaneNeighbors(int[,] arr)
         {
             if (arr == null || arr.Length == 0)
             {
@@ -118,7 +118,7 @@ namespace ProjLibrary
             array[j, i] = temp;
         }
 
-        public static void MirrorArray_6(ref int[,] arr)
+        public static void MirrorArray(ref int[,] arr)
         {
             if (arr == null || arr.Length == 0)
             {

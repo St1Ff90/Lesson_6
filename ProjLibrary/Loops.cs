@@ -6,7 +6,7 @@ namespace ProjLibrary
 {
     public class Loops
     {
-        public static double RiseToThePower_1(double num, int degree)
+        public static double RiseToThePower(double num, int degree)
         {
             if (num == 0 || degree == 0)
             {
@@ -22,7 +22,7 @@ namespace ProjLibrary
             return Math.Round(result, 2);
         }
 
-        public static int[] RoundDigits_2(int divider)
+        public static int[] RoundDigits(int divider)
         {
             if (divider == 0)
             {
@@ -39,7 +39,7 @@ namespace ProjLibrary
             return result;
         }
 
-        public static int TotalCountOfPositiveDigits_3(int maxNum)
+        public static int TotalCountOfPositiveDigits(int maxNum)
         {
             if (maxNum < 1)
             {
@@ -58,7 +58,7 @@ namespace ProjLibrary
             return result;
         }
 
-        public static int Divider_4(int num)
+        public static int Divider(int num)
         {
             if (num < 1)
             {
@@ -84,7 +84,7 @@ namespace ProjLibrary
             b = temp;
         }
 
-        public static int SumOfDigitsDividedtoSeven_5(int start, int end)
+        public static int SumOfDigitsDividedtoSeven(int start, int end)
         {
             if (start == end)
             {
@@ -107,7 +107,7 @@ namespace ProjLibrary
             return result;
         }
 
-        public static int FibonacciLineToStep_6(int count)
+        public static int FibonacciLineToStep(int count)
         {
             if (count < 1)
             {
@@ -128,7 +128,7 @@ namespace ProjLibrary
             return result;
         }
 
-        public static int EuclideAlgorithm_7(int first, int second)
+        public static int EuclideAlgorithm(int first, int second)
         {
             if (first < 1 || second < 1)
             {
@@ -150,7 +150,7 @@ namespace ProjLibrary
         }
 
 
-        public static double DigitSqareByBisection_8(int num)
+        public static double DigitSqareByBisection(int num)
         {
             if (num < 1)
             {
@@ -184,7 +184,7 @@ namespace ProjLibrary
         }
 
 
-        public static int CountOddNumbers_9(int num)
+        public static int CountOddNumbers(int num)
         {
             if (num < 1)
             {
@@ -206,7 +206,7 @@ namespace ProjLibrary
             return result;
         }
 
-        public static int ReverseNum_10(int num)
+        public static int ReverseNum(int num)
         {
             if (num == 0)
             {
@@ -225,7 +225,7 @@ namespace ProjLibrary
             return result;
         }
 
-        public static int[] NumsWithSumOfEvenBiggerOdd_11(int num)
+        public static int[] NumsWithSumOfEvenBiggerOdd(int num)
         {
             if (num < 1)
             {
@@ -254,7 +254,7 @@ namespace ProjLibrary
             return result;
         }
 
-        public static bool SameDigits_12(int first, int second)
+        public static bool SameDigits(int first, int second)
         {
             if (first < 1 || second < 1)
             {

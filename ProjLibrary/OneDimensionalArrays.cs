@@ -6,32 +6,32 @@ namespace ProjLibrary
 {
     public class OneDimensionalArrays
     {
-        public static int MinNumInArray_1(int[] arr)
+        public static int MinNumInArray(int[] arr)
         {
             if (arr == null || arr.Length == 0)
             {
-                throw new ArgumentNullException("Array is empty");
+                throw new ArgumentNullException("Array", "Array is empty");
             }
 
-            return arr[MinIndexInArray_3(arr)];
+            return arr[MinIndexInArray(arr)];
         }
 
-        public static int MaxNumInArray_2(int[] arr)
+        public static int MaxNumInArray(int[] arr)
         {
             if (arr == null || arr.Length == 0)
             {
-                throw new ArgumentNullException("Array is empty");
+                throw new ArgumentNullException("Array", "Array is empty");
             }
 
-            return arr[MaxIndexInArray_4(arr)];
+            return arr[MaxIndexInArray(arr)];
 
         }
 
-        public static int MinIndexInArray_3(int[] arr)
+        public static int MinIndexInArray(int[] arr)
         {
             if (arr == null || arr.Length == 0)
             {
-                throw new ArgumentNullException("Array is empty");
+                throw new ArgumentNullException("Array", "Array is empty");
             }
 
             int result = 0;
@@ -47,11 +47,11 @@ namespace ProjLibrary
             return result;
         }
 
-        public static int MaxIndexInArray_4(int[] arr)
+        public static int MaxIndexInArray(int[] arr)
         {
             if (arr == null || arr.Length == 0)
             {
-                throw new ArgumentNullException("Array is empty");
+                throw new ArgumentNullException("Array", message: "Array is empty");
             }
 
             int result = 0;
@@ -67,11 +67,11 @@ namespace ProjLibrary
             return result;
         }
 
-        public static int SummOfItemsWithOddIndexesInArray_5(int[] arr)
+        public static int SummOfItemsWithOddIndexesInArray(int[] arr)
         {
             if (arr == null || arr.Length == 0)
             {
-                throw new ArgumentNullException("Array is empty");
+                throw new ArgumentNullException("Array", "Array is empty");
             }
 
             int result = 0;
@@ -84,11 +84,11 @@ namespace ProjLibrary
             return result;
         }
 
-        public static void ReverseArray_6(ref int[] arr)
+        public static void ReverseArray(ref int[] arr)
         {
             if (arr == null || arr.Length == 0)
             {
-                throw new ArgumentNullException("Array is empty");
+                throw new ArgumentNullException("Array", "Array is empty");
             }
 
             for (int i = 0; i < arr.Length / 2; i++)
@@ -97,11 +97,11 @@ namespace ProjLibrary
             }
         }
 
-        public static int OddEleemeentsCount_7(int[] arr)
+        public static int OddEleemeentsCount(int[] arr)
         {
             if (arr == null || arr.Length == 0)
             {
-                throw new ArgumentNullException("Array is empty");
+                throw new ArgumentNullException("Array", "Array is empty");
             }
 
             int result = 0;
@@ -117,11 +117,11 @@ namespace ProjLibrary
             return result;
         }
 
-        public static void ReverseNums_8(ref int[] arr)
+        public static void ReverseNums(ref int[] arr)
         {
             if (arr == null || arr.Length == 0)
             {
-                throw new ArgumentNullException("Array is empty");
+                throw new ArgumentNullException("Array", "Array is empty");
             }
 
             int integerPlus = arr.Length % 2;
@@ -133,11 +133,11 @@ namespace ProjLibrary
         }
 
 
-        public static void SelectionSortIncrease_9(ref int[] arr)
+        public static void SelectionSortIncrease(ref int[] arr)
         {
             if (arr == null || arr.Length == 0)
             {
-                throw new ArgumentNullException("Array is empty");
+                throw new ArgumentNullException("Array", "Array is empty");
             }
 
             for (int i = 0; i < arr.Length - 1; i++)
@@ -163,11 +163,11 @@ namespace ProjLibrary
             array[j] = temp;
         }
 
-        public static void InsertSortDecrease_10(ref int[] arr)
+        public static void InsertSortDecrease(ref int[] arr)
         {
             if (arr == null || arr.Length == 0)
             {
-                throw new ArgumentNullException("Array is empty");
+                throw new ArgumentNullException("Array", "Array is empty");
             }
 
             int x;

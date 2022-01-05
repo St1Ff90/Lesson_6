@@ -7,7 +7,6 @@ namespace ProjTests
     {
         [TestCase(2, 3, 19)]
         [TestCase(3, 5, 20)]
-
         public void CalculateFormula_WhenANotEquualToB_ShouldCulculateFormula(double a, double b, double expeectedResult)
         {
             double actualResult = ProjLibrary.Variables.CalculateFormula_1(a, b);
@@ -15,7 +14,6 @@ namespace ProjTests
         }
 
         [TestCase(1, 1)]
-
         public void CalculateFormula_WhenAEquualToB_ShouldThrowArgumentException(double a, double b)
         {
             try
@@ -33,7 +31,6 @@ namespace ProjTests
         }
 
         [TestCase(0, 0)]
-
         public void CalculateFormula_WhenAAndBIsZero_ShouldThrowNullReferenceException(double a, double b)
         {
             try
@@ -53,7 +50,6 @@ namespace ProjTests
 
         [TestCase("first", "second")]
         [TestCase("Hello world!", "World hello!")]
-
         public void SwapVariables_WhenFirstOrSecondIsNotNullOrBothAreNull_ShouldSwapVariables(string first, string second)
         {
             (string first, string second) tuple = ProjLibrary.Variables.SwapVariables_2(first, second);
@@ -64,7 +60,6 @@ namespace ProjTests
         [TestCase(null, null)]
         [TestCase(null, "")]
         [TestCase("", null)]
-
         public void SwapVariables_WhenFirstOrSecondIsNullOrBothAreNull_ShouldThrowArgumentNullException(string first, string second)
         {
             try

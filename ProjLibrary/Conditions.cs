@@ -6,7 +6,7 @@ namespace ProjLibrary
 {
     public class Conditions
     {
-        public static double Sum_1(double A, double B)
+        public static double Sum(double A, double B)
         {
             double result;
 
@@ -26,7 +26,7 @@ namespace ProjLibrary
             return result;
         }
 
-        public static int PointCoordinates_2(double x, double y)
+        public static int PointCoordinates(double x, double y)
         {
             if (x == 0 || y == 0)
             {
@@ -55,7 +55,7 @@ namespace ProjLibrary
             b = temp;
         }
 
-        public static void SortThreeDigits_3(ref double first, ref double second, ref double third)
+        public static void SortThreeDigits(ref double first, ref double second, ref double third)
         {
             if (first > second)
             {
@@ -71,7 +71,7 @@ namespace ProjLibrary
             }
         }
 
-        public static (double x1, double x2) QuadraticEquation_4(double a, double b, double c)
+        public static (double x1, double x2) QuadraticEquation(double a, double b, double c)
         {
             if (a == 0)
             {
@@ -100,7 +100,7 @@ namespace ProjLibrary
             return (x1, x2);
         }
 
-        public static string WriteNumber_5(int num)
+        public static string WriteNumber(int num)
         {
             if (num < 10 || num > 99)
             {
