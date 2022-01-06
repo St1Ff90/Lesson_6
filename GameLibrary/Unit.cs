@@ -7,19 +7,12 @@ namespace GameLibrary
         private double _healthPoints;
         private double _attackDamage;
 
-        public double Health
-        {
-            get { return _healthPoints; }
-        }
+        public double Health => _healthPoints;  
+        public double GetAttackRate => _attackDamage;
 
-        public double GetAttackRate
+        public void ApplyDemage(double damage)
         {
-            get { return _attackDamage; }
-        }
-
-        public void ApplyDemage(double demage)
-        {
-            _healthPoints -= demage;
+            _healthPoints -= damage;
 
             if (_healthPoints < 0)
             {

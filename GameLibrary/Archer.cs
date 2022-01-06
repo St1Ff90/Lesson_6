@@ -6,16 +6,16 @@ namespace GameLibrary
 {
     public class Archer : Unit
     {
-        private const double HelthPoints = 1000;
-        private const double AtackDemage = 35;
+        private const double HealthPoints = 1000;
+        private const double AtackDamage = 35;
         private const int DodgeFromAttack = 70;
-        private const double DemageRate = 1.2;
+        private const double DamageRate = 1.2;
         private const int CriticalAttackChance = 33;
         private const int CriticalRate = 2;
 
-        Random rundom = new Random();
+        private Random rundom = new Random();
 
-        public Archer() : base(HelthPoints, AtackDemage)
+        public Archer() : base(HealthPoints, AtackDamage)
         {
         }
 
@@ -23,11 +23,11 @@ namespace GameLibrary
         {
             if (rundom.Next(0, 100) < CriticalAttackChance)
             {
-                this.ChengeAttackDemage(AtackDemage  * CriticalRate);
+                this.ChengeAttackDemage(AtackDamage  * CriticalRate);
             }
             else
             {
-                this.ChengeAttackDemage(AtackDemage);
+                this.ChengeAttackDemage(AtackDamage);
             }
         }
 
@@ -35,7 +35,7 @@ namespace GameLibrary
         {
             if (rundom.Next(0, 100) > DodgeFromAttack)
             {
-                this.ApplyDemage(unit.GetAttackRate * DemageRate);
+                this.ApplyDemage(unit.GetAttackRate * DamageRate);
             }
 
         }

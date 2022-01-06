@@ -6,16 +6,12 @@ namespace GameLibrary
 {
     public class Warior : Unit
     {
-        private const double HelthPoints = 2000;
-        private const double AtackDemage = 20;
+        private const double HealthPoints = 2000;
+        private const double AtackDamage = 20;
         private const double DefenceRate = 0.7;
         private const double AttackRate = 0.5;
 
-        public Warior() : base(HelthPoints, AtackDemage * AttackRate)
-        {
-        }
-
-        public void Attack()
+        public Warior() : base(HealthPoints, AtackDamage * AttackRate)
         {
         }
 
