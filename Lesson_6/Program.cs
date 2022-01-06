@@ -30,156 +30,172 @@ namespace Lesson_6
             }
 
             //Simulate game with 3x3 parties (attack random unit in opponent party) until full death of enemies.
-
-            List<object> Gourpe1 = new List<object>();
-            List<object> Gourpe2 = new List<object>();
+            Console.Clear();
+            List<object> Groupe1 = new List<object>();
+            List<object> Groupe2 = new List<object>();
 
             for (int i = 0; i < 3; i++)
             {
                 if (rundom.Next(2) == 1)
                 {
-                    Gourpe1.Add(new GameLibrary.Archer());
+                    Groupe1.Add(new GameLibrary.Archer());
                 }
                 else
                 {
-                    Gourpe1.Add(new GameLibrary.Warior());
+                    Groupe1.Add(new GameLibrary.Warior());
                 }
 
                 if (rundom.Next(2) == 1)
                 {
-                    Gourpe2.Add(new GameLibrary.Archer());
+                    Groupe2.Add(new GameLibrary.Archer());
                 }
                 else
                 {
-                    Gourpe2.Add(new GameLibrary.Warior());
+                    Groupe2.Add(new GameLibrary.Warior());
                 }
             }
 
-            while (Gourpe1.Count != 0 && Gourpe2.Count != 0)
+            while (Groupe1.Count != 0 && Groupe2.Count != 0)
             {
-                int attackUnitIndex = rundom.Next(0, Gourpe1.Count);
-                int defenceUnitIndex = rundom.Next(0, Gourpe2.Count);
+                int attackUnitIndex = rundom.Next(0, Groupe1.Count);
+                int defenceUnitIndex = rundom.Next(0, Groupe2.Count);
 
-                if (Gourpe1[attackUnitIndex].GetType() == typeof(GameLibrary.Archer))
+                if (Groupe1[attackUnitIndex].GetType() == typeof(GameLibrary.Archer))
                 {
-                    GameLibrary.Archer attackArcher = (GameLibrary.Archer)Gourpe1[attackUnitIndex];
+                    GameLibrary.Archer attackArcher = (GameLibrary.Archer)Groupe1[attackUnitIndex];
                     attackArcher.Attack();
-                    if(Gourpe2[defenceUnitIndex].GetType() == typeof(GameLibrary.Archer))
+                    if(Groupe2[defenceUnitIndex].GetType() == typeof(GameLibrary.Archer))
                     {
-                        GameLibrary.Archer defenceArcher = (GameLibrary.Archer) Gourpe2[defenceUnitIndex];
+                        GameLibrary.Archer defenceArcher = (GameLibrary.Archer) Groupe2[defenceUnitIndex];
                         defenceArcher.Defence(attackArcher);
                         if(defenceArcher.Health == 0)
                         {
-                            Gourpe2.RemoveAt(defenceUnitIndex);
+                            Console.WriteLine("Groupe 2 Archer is dead. Killed by Archer from group 1");
+                            Groupe2.RemoveAt(defenceUnitIndex);
                         }
                         else
                         {
-                            Gourpe2[defenceUnitIndex] = defenceArcher;
+                            Groupe2[defenceUnitIndex] = defenceArcher;
                         }
                     }
                     else
                     {
-                        GameLibrary.Warior defenceWarior = (GameLibrary.Warior)Gourpe2[defenceUnitIndex];
+                        GameLibrary.Warior defenceWarior = (GameLibrary.Warior)Groupe2[defenceUnitIndex];
                         defenceWarior.Defence(attackArcher);
                         if (defenceWarior.Health == 0)
                         {
-                            Gourpe2.RemoveAt(defenceUnitIndex);
+                            Console.WriteLine("Groupe 2 Warior is dead. Killed by Archer from group 1");
+                            Groupe2.RemoveAt(defenceUnitIndex);
                         }
                         else
                         {
-                            Gourpe2[defenceUnitIndex] = defenceWarior;
+                            Groupe2[defenceUnitIndex] = defenceWarior;
                         }
                     }
                 }
                 else
                 {
-                    GameLibrary.Warior attackWarior = (GameLibrary.Warior)Gourpe1[attackUnitIndex];
-                    if (Gourpe2[defenceUnitIndex].GetType() == typeof(GameLibrary.Archer))
+                    GameLibrary.Warior attackWarior = (GameLibrary.Warior)Groupe1[attackUnitIndex];
+                    if (Groupe2[defenceUnitIndex].GetType() == typeof(GameLibrary.Archer))
                     {
-                        GameLibrary.Archer defenceArcher = (GameLibrary.Archer)Gourpe2[defenceUnitIndex];
+                        GameLibrary.Archer defenceArcher = (GameLibrary.Archer)Groupe2[defenceUnitIndex];
                         defenceArcher.Defence(attackWarior);
                         if (defenceArcher.Health == 0)
                         {
-                            Gourpe2.RemoveAt(defenceUnitIndex);
+                            Console.WriteLine("Groupe 2 Archer is dead. Killed by Warior from group 1");
+                            Groupe2.RemoveAt(defenceUnitIndex);
                         }
                         else
                         {
-                            Gourpe2[defenceUnitIndex] = defenceArcher;
+                            Groupe2[defenceUnitIndex] = defenceArcher;
                         }
                     }
                     else
                     {
-                        GameLibrary.Warior defenceWarior = (GameLibrary.Warior)Gourpe2[defenceUnitIndex];
+                        GameLibrary.Warior defenceWarior = (GameLibrary.Warior)Groupe2[defenceUnitIndex];
                         defenceWarior.Defence(attackWarior);
                         if (defenceWarior.Health == 0)
                         {
-                            Gourpe2.RemoveAt(defenceUnitIndex);
+                            Console.WriteLine("Groupe 2 Warior is dead. Killed by Warior from group 1");
+                            Groupe2.RemoveAt(defenceUnitIndex);
                         }
                         else
                         {
-                            Gourpe2[defenceUnitIndex] = defenceWarior;
+                            Groupe2[defenceUnitIndex] = defenceWarior;
                         }
                     }
                 }
 
-                if (Gourpe2[attackUnitIndex].GetType() == typeof(GameLibrary.Archer))
+                if(Groupe2.Count == 0)
                 {
-                    GameLibrary.Archer attackArcher = (GameLibrary.Archer)Gourpe2[attackUnitIndex];
+                    break;
+                }
+
+                attackUnitIndex = rundom.Next(0, Groupe2.Count);
+                defenceUnitIndex = rundom.Next(0, Groupe1.Count);
+
+                if (Groupe2[attackUnitIndex].GetType() == typeof(GameLibrary.Archer))
+                {
+                    GameLibrary.Archer attackArcher = (GameLibrary.Archer)Groupe2[attackUnitIndex];
                     attackArcher.Attack();
-                    if (Gourpe1[defenceUnitIndex].GetType() == typeof(GameLibrary.Archer))
+                    if (Groupe1[defenceUnitIndex].GetType() == typeof(GameLibrary.Archer))
                     {
-                        GameLibrary.Archer defenceArcher = (GameLibrary.Archer)Gourpe1[defenceUnitIndex];
+                        GameLibrary.Archer defenceArcher = (GameLibrary.Archer)Groupe1[defenceUnitIndex];
                         defenceArcher.Defence(attackArcher);
                         if (defenceArcher.Health == 0)
                         {
-                            Gourpe1.RemoveAt(defenceUnitIndex);
+                            Console.WriteLine("Groupe 1 Archer is dead. Killed by Archer from group 2");
+                            Groupe1.RemoveAt(defenceUnitIndex);
                         }
                         else
                         {
-                            Gourpe1[defenceUnitIndex] = defenceArcher;
+                            Groupe1[defenceUnitIndex] = defenceArcher;
                         }
                     }
                     else
                     {
-                        GameLibrary.Warior defenceWarior = (GameLibrary.Warior)Gourpe1[defenceUnitIndex];
+                        GameLibrary.Warior defenceWarior = (GameLibrary.Warior)Groupe1[defenceUnitIndex];
                         defenceWarior.Defence(attackArcher);
                         if (defenceWarior.Health == 0)
                         {
-                            Gourpe1.RemoveAt(defenceUnitIndex);
+                            Console.WriteLine("Groupe 1 Warior is dead. Killed by Archer from group 2");
+                            Groupe1.RemoveAt(defenceUnitIndex);
                         }
                         else
                         {
-                            Gourpe1[defenceUnitIndex] = defenceWarior;
+                            Groupe1[defenceUnitIndex] = defenceWarior;
                         }
                     }
                 }
                 else
                 {
-                    GameLibrary.Warior attackWarior = (GameLibrary.Warior)Gourpe2[attackUnitIndex];
-                    if (Gourpe1[defenceUnitIndex].GetType() == typeof(GameLibrary.Archer))
+                    GameLibrary.Warior attackWarior = (GameLibrary.Warior)Groupe2[attackUnitIndex];
+                    if (Groupe1[defenceUnitIndex].GetType() == typeof(GameLibrary.Archer))
                     {
-                        GameLibrary.Archer defenceArcher = (GameLibrary.Archer)Gourpe1[defenceUnitIndex];
+                        GameLibrary.Archer defenceArcher = (GameLibrary.Archer)Groupe1[defenceUnitIndex];
                         defenceArcher.Defence(attackWarior);
                         if (defenceArcher.Health == 0)
                         {
-                            Gourpe1.RemoveAt(defenceUnitIndex);
+                            Console.WriteLine("Groupe 1 Archer is dead. Killed by Warior from group 2");
+                            Groupe1.RemoveAt(defenceUnitIndex);
                         }
                         else
                         {
-                            Gourpe1[defenceUnitIndex] = defenceArcher;
+                            Groupe1[defenceUnitIndex] = defenceArcher;
                         }
                     }
                     else
                     {
-                        GameLibrary.Warior defenceWarior = (GameLibrary.Warior)Gourpe1[defenceUnitIndex];
+                        GameLibrary.Warior defenceWarior = (GameLibrary.Warior)Groupe1[defenceUnitIndex];
                         defenceWarior.Defence(attackWarior);
                         if (defenceWarior.Health == 0)
                         {
-                            Gourpe1.RemoveAt(defenceUnitIndex);
+                            Console.WriteLine("Groupe 1 Warior is dead. Killed by Warior from group 2");
+                            Groupe1.RemoveAt(defenceUnitIndex);
                         }
                         else
                         {
-                            Gourpe1[defenceUnitIndex] = defenceWarior;
+                            Groupe1[defenceUnitIndex] = defenceWarior;
                         }
                     }
                 }
