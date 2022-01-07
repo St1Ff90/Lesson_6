@@ -19,25 +19,27 @@ namespace GameLibrary
         {
         }
 
-        public void Attack()
+        protected override double GetAttackRate()
         {
             if (rundom.Next(0, 100) < CriticalAttackChance)
             {
-                this.ChengeAttackDemage(AtackDamage  * CriticalRate);
+                return AtackDamage  * CriticalRate;
             }
             else
             {
-                this.ChengeAttackDemage(AtackDamage);
+                return AtackDamage;
             }
         }
 
-        public void Defence(Unit unit)
+        protected override double Defence(double atackRate)
         {
             if (rundom.Next(0, 100) > DodgeFromAttack)
             {
-                this.ApplyDemage(unit.GetAttackRate * DamageRate);
+                return atackRate * DamageRate;
             }
-
+            return 0;
         }
+
+        public override string ToString() => "Archer";
     }
 }

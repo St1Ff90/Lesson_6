@@ -1,4 +1,5 @@
 ﻿using System;
+using GameLibrary;
 using System.Collections.Generic;
 
 namespace Lesson_6
@@ -9,196 +10,161 @@ namespace Lesson_6
         {
             Random rundom = new Random();
 
-            GameLibrary.Archer archer = new GameLibrary.Archer();
-            GameLibrary.Warior warior = new GameLibrary.Warior();
-            int turn = 0;
+            Simulation1on1();
+            Simulation3on3();
+            SimulationBattleRoyal(10);
 
-            //Simulate game with random unit turn first until death of opponent
-            if (rundom.Next(2) == 1)
+            void Simulation1on1()
             {
-                archer.Attack();
-                warior.Defence(archer);
-            }
-            while (archer.Health != 0 && warior.Health != 0)
-            {
-                archer.Defence(warior);
-                archer.Attack();
-                warior.Defence(archer);
-                Console.WriteLine("Round " + turn + " archer health is " + archer.Health + " archer attack is " + archer.GetAttackRate +
-                    " Warior health is " + warior.Health);
-                turn++;
-            }
 
-            //Simulate game with 3x3 parties (attack random unit in opponent party) until full death of enemies.
-            Console.Clear();
-            List<object> Groupe1 = new List<object>();
-            List<object> Groupe2 = new List<object>();
-
-            for (int i = 0; i < 3; i++)
-            {
-                if (rundom.Next(2) == 1)
-                {
-                    Groupe1.Add(new GameLibrary.Archer());
-                }
-                else
-                {
-                    Groupe1.Add(new GameLibrary.Warior());
-                }
+                Archer archer = new Archer();
+                Warior warior = new Warior();
+                int turn = 0;
 
                 if (rundom.Next(2) == 1)
                 {
-                    Groupe2.Add(new GameLibrary.Archer());
+                    archer.Attack(warior);
                 }
-                else
+                while (archer.Health != 0 && warior.Health != 0)
                 {
-                    Groupe2.Add(new GameLibrary.Warior());
+                    warior.Attack(archer);
+                    archer.Attack(warior);
+
+                    Console.WriteLine("Round " + turn + " archer health is " + archer.Health + " archer attack is " + archer.Power +
+                        " Warior health is " + warior.Health);
+                    turn++;
+                }
+
+                Console.Clear();
+            }
+
+            void Simulation3on3()
+            {
+                Unit[] unitsParty1 = new Unit[3];
+                Unit[] unitsParty2 = new Unit[3];
+
+                for (int i = 0; i < 3; i++)
+                {
+                    if (rundom.Next(2) == 1)
+                    {
+                        unitsParty1[i] = new Archer();
+                    }
+                    else
+                    {
+                        unitsParty1[i] = new Warior();
+                    }
+                    if (rundom.Next(2) == 1)
+                    {
+                        unitsParty2[i] = new Archer();
+                    }
+                    else
+                    {
+                        unitsParty2[i] = new Warior();
+                    }
+                }
+
+                while (unitsParty1.Length != 0 && unitsParty2.Length != 0)
+                {
+                    if (rundom.Next(2) == 1)
+                    {
+                        SwapArrs(ref unitsParty1, ref unitsParty2);
+                        Console.WriteLine("Groups was swaped");
+                    }
+
+                    int attackUnitIndex = rundom.Next(unitsParty1.Length);
+                    int defenceUnitIndex = rundom.Next(unitsParty2.Length);
+
+                    unitsParty1[attackUnitIndex].Attack(unitsParty2[defenceUnitIndex]);
+                    if (unitsParty2[defenceUnitIndex].Health == 0)
+                    {
+                        Console.WriteLine(unitsParty2[defenceUnitIndex].ToString() +
+                            " from Group 2 was killed by " + unitsParty1[attackUnitIndex].ToString() + " from Group 1");
+                        unitsParty2 = RemoveDeadUnitFromGroup(defenceUnitIndex, unitsParty2);
+                        defenceUnitIndex = rundom.Next(0, unitsParty2.Length);
+                        if (unitsParty2.Length == 0)
+                        {
+                            Console.WriteLine("Game over, Group 1 Win!");
+                            Console.Clear();
+                            return;
+                        }
+                    }
+
+                    unitsParty2[defenceUnitIndex].Attack(unitsParty1[attackUnitIndex]);
+                    if (unitsParty1[attackUnitIndex].Health == 0)
+                    {
+                        Console.WriteLine(unitsParty1[attackUnitIndex].ToString() +
+                            " from Group 1 was killed by " + unitsParty1[attackUnitIndex].ToString() + " from Group 2");
+                        unitsParty1 = RemoveDeadUnitFromGroup(attackUnitIndex, unitsParty1);
+                        if (unitsParty1.Length == 0)
+                        {
+                            Console.WriteLine("Game over, Group 2 Win!");
+                            Console.Clear();
+                            return;
+                        }
+                    }
                 }
             }
 
-            while (Groupe1.Count != 0 && Groupe2.Count != 0)
+            void SimulationBattleRoyal(int quantity)
             {
-                int attackUnitIndex = rundom.Next(0, Groupe1.Count);
-                int defenceUnitIndex = rundom.Next(0, Groupe2.Count);
+                Unit[] units = new Unit[quantity];
 
-                if (Groupe1[attackUnitIndex].GetType() == typeof(GameLibrary.Archer))
+                for (int i = 0; i < quantity; i++)
                 {
-                    GameLibrary.Archer attackArcher = (GameLibrary.Archer)Groupe1[attackUnitIndex];
-                    attackArcher.Attack();
-                    if(Groupe2[defenceUnitIndex].GetType() == typeof(GameLibrary.Archer))
+                    if (rundom.Next(2) == 1)
                     {
-                        GameLibrary.Archer defenceArcher = (GameLibrary.Archer) Groupe2[defenceUnitIndex];
-                        defenceArcher.Defence(attackArcher);
-                        if(defenceArcher.Health == 0)
-                        {
-                            Console.WriteLine("Groupe 2 Archer is dead. Killed by Archer from group 1");
-                            Groupe2.RemoveAt(defenceUnitIndex);
-                        }
-                        else
-                        {
-                            Groupe2[defenceUnitIndex] = defenceArcher;
-                        }
+                        units[i] = new Archer();
                     }
                     else
                     {
-                        GameLibrary.Warior defenceWarior = (GameLibrary.Warior)Groupe2[defenceUnitIndex];
-                        defenceWarior.Defence(attackArcher);
-                        if (defenceWarior.Health == 0)
-                        {
-                            Console.WriteLine("Groupe 2 Warior is dead. Killed by Archer from group 1");
-                            Groupe2.RemoveAt(defenceUnitIndex);
-                        }
-                        else
-                        {
-                            Groupe2[defenceUnitIndex] = defenceWarior;
-                        }
-                    }
-                }
-                else
-                {
-                    GameLibrary.Warior attackWarior = (GameLibrary.Warior)Groupe1[attackUnitIndex];
-                    if (Groupe2[defenceUnitIndex].GetType() == typeof(GameLibrary.Archer))
-                    {
-                        GameLibrary.Archer defenceArcher = (GameLibrary.Archer)Groupe2[defenceUnitIndex];
-                        defenceArcher.Defence(attackWarior);
-                        if (defenceArcher.Health == 0)
-                        {
-                            Console.WriteLine("Groupe 2 Archer is dead. Killed by Warior from group 1");
-                            Groupe2.RemoveAt(defenceUnitIndex);
-                        }
-                        else
-                        {
-                            Groupe2[defenceUnitIndex] = defenceArcher;
-                        }
-                    }
-                    else
-                    {
-                        GameLibrary.Warior defenceWarior = (GameLibrary.Warior)Groupe2[defenceUnitIndex];
-                        defenceWarior.Defence(attackWarior);
-                        if (defenceWarior.Health == 0)
-                        {
-                            Console.WriteLine("Groupe 2 Warior is dead. Killed by Warior from group 1");
-                            Groupe2.RemoveAt(defenceUnitIndex);
-                        }
-                        else
-                        {
-                            Groupe2[defenceUnitIndex] = defenceWarior;
-                        }
+                        units[i] = new Warior();
                     }
                 }
 
-                if(Groupe2.Count == 0)
+                while (units.Length > 1)
                 {
-                    break;
+                    int attackUnitIndex = rundom.Next(units.Length);
+                    int defanceUnitIndex = rundom.Next(units.Length);
+
+                    while (defanceUnitIndex == attackUnitIndex)
+                    {
+                        defanceUnitIndex = rundom.Next(units.Length);
+                    }
+
+                    units[attackUnitIndex].Attack(units[defanceUnitIndex]);
+                    if(units[defanceUnitIndex].Health == 0)
+                    {
+                        Console.WriteLine(units[defanceUnitIndex].ToString() + " was killed by " + units[attackUnitIndex].ToString());
+                        units = RemoveDeadUnitFromGroup(defanceUnitIndex, units);
+                    }
+                }
+            }
+
+            void SwapArrs(ref Unit[] unitsParty1, ref Unit[] unitsParty2)
+            {
+                Unit[] temp = unitsParty1;
+                unitsParty1 = unitsParty2;
+                unitsParty2 = temp;
+            }
+
+            Unit[] RemoveDeadUnitFromGroup(int unitIndex, Unit[] arr)
+            {
+                if (arr == null || arr.Length == 0)
+                {
+                    throw new ArgumentNullException("Array");
                 }
 
-                attackUnitIndex = rundom.Next(0, Groupe2.Count);
-                defenceUnitIndex = rundom.Next(0, Groupe1.Count);
+                Unit[] tempArr = new Unit[arr.Length - 1];
 
-                if (Groupe2[attackUnitIndex].GetType() == typeof(GameLibrary.Archer))
+                for (int i = 0, j = 0; i < tempArr.Length; i++, j++)
                 {
-                    GameLibrary.Archer attackArcher = (GameLibrary.Archer)Groupe2[attackUnitIndex];
-                    attackArcher.Attack();
-                    if (Groupe1[defenceUnitIndex].GetType() == typeof(GameLibrary.Archer))
+                    if (j == unitIndex)
                     {
-                        GameLibrary.Archer defenceArcher = (GameLibrary.Archer)Groupe1[defenceUnitIndex];
-                        defenceArcher.Defence(attackArcher);
-                        if (defenceArcher.Health == 0)
-                        {
-                            Console.WriteLine("Groupe 1 Archer is dead. Killed by Archer from group 2");
-                            Groupe1.RemoveAt(defenceUnitIndex);
-                        }
-                        else
-                        {
-                            Groupe1[defenceUnitIndex] = defenceArcher;
-                        }
+                        j++;
                     }
-                    else
-                    {
-                        GameLibrary.Warior defenceWarior = (GameLibrary.Warior)Groupe1[defenceUnitIndex];
-                        defenceWarior.Defence(attackArcher);
-                        if (defenceWarior.Health == 0)
-                        {
-                            Console.WriteLine("Groupe 1 Warior is dead. Killed by Archer from group 2");
-                            Groupe1.RemoveAt(defenceUnitIndex);
-                        }
-                        else
-                        {
-                            Groupe1[defenceUnitIndex] = defenceWarior;
-                        }
-                    }
+                    tempArr[i] = arr[j];
                 }
-                else
-                {
-                    GameLibrary.Warior attackWarior = (GameLibrary.Warior)Groupe2[attackUnitIndex];
-                    if (Groupe1[defenceUnitIndex].GetType() == typeof(GameLibrary.Archer))
-                    {
-                        GameLibrary.Archer defenceArcher = (GameLibrary.Archer)Groupe1[defenceUnitIndex];
-                        defenceArcher.Defence(attackWarior);
-                        if (defenceArcher.Health == 0)
-                        {
-                            Console.WriteLine("Groupe 1 Archer is dead. Killed by Warior from group 2");
-                            Groupe1.RemoveAt(defenceUnitIndex);
-                        }
-                        else
-                        {
-                            Groupe1[defenceUnitIndex] = defenceArcher;
-                        }
-                    }
-                    else
-                    {
-                        GameLibrary.Warior defenceWarior = (GameLibrary.Warior)Groupe1[defenceUnitIndex];
-                        defenceWarior.Defence(attackWarior);
-                        if (defenceWarior.Health == 0)
-                        {
-                            Console.WriteLine("Groupe 1 Warior is dead. Killed by Warior from group 2");
-                            Groupe1.RemoveAt(defenceUnitIndex);
-                        }
-                        else
-                        {
-                            Groupe1[defenceUnitIndex] = defenceWarior;
-                        }
-                    }
-                }
+                return tempArr;
             }
         }
     }

@@ -15,9 +15,16 @@ namespace GameLibrary
         {
         }
 
-        public void Defence(Unit unit)
+        protected override double GetAttackRate()
         {
-            this.ApplyDemage(unit.GetAttackRate * DefenceRate);
+            return AtackDamage * AttackRate;
         }
+
+        protected override double Defence(double atackRate)
+        {
+            return atackRate * DefenceRate;
+        }
+
+        public override string ToString() => "Warior";
     }
 }
