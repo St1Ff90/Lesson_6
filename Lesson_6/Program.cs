@@ -8,7 +8,7 @@ namespace Lesson_6
     {
         static void Main(string[] args)
         {
-            Random rundom = new Random();
+            Random random = new Random();
 
             Simulation1on1();
             Simulation3on3();
@@ -21,7 +21,7 @@ namespace Lesson_6
                 Warior warior = new Warior();
                 int turn = 0;
 
-                if (rundom.Next(2) == 1)
+                if (random.Next(2) == 1)
                 {
                     archer.Attack(warior);
                 }
@@ -45,7 +45,7 @@ namespace Lesson_6
 
                 for (int i = 0; i < 3; i++)
                 {
-                    if (rundom.Next(2) == 1)
+                    if (random.Next(2) == 1)
                     {
                         unitsParty1[i] = new Archer();
                     }
@@ -53,7 +53,7 @@ namespace Lesson_6
                     {
                         unitsParty1[i] = new Warior();
                     }
-                    if (rundom.Next(2) == 1)
+                    if (random.Next(2) == 1)
                     {
                         unitsParty2[i] = new Archer();
                     }
@@ -65,14 +65,14 @@ namespace Lesson_6
 
                 while (unitsParty1.Length != 0 && unitsParty2.Length != 0)
                 {
-                    if (rundom.Next(2) == 1)
+                    if (random.Next(2) == 1)
                     {
                         SwapArrs(ref unitsParty1, ref unitsParty2);
                         Console.WriteLine("Groups was swaped");
                     }
 
-                    int attackUnitIndex = rundom.Next(unitsParty1.Length);
-                    int defenceUnitIndex = rundom.Next(unitsParty2.Length);
+                    int attackUnitIndex = random.Next(unitsParty1.Length);
+                    int defenceUnitIndex = random.Next(unitsParty2.Length);
 
                     unitsParty1[attackUnitIndex].Attack(unitsParty2[defenceUnitIndex]);
                     if (unitsParty2[defenceUnitIndex].Health == 0)
@@ -80,7 +80,7 @@ namespace Lesson_6
                         Console.WriteLine(unitsParty2[defenceUnitIndex].ToString() +
                             " from Group 2 was killed by " + unitsParty1[attackUnitIndex].ToString() + " from Group 1");
                         unitsParty2 = RemoveDeadUnitFromGroup(defenceUnitIndex, unitsParty2);
-                        defenceUnitIndex = rundom.Next(0, unitsParty2.Length);
+                        defenceUnitIndex = random.Next(0, unitsParty2.Length);
                         if (unitsParty2.Length == 0)
                         {
                             Console.WriteLine("Game over, Group 1 Win!");
@@ -89,8 +89,8 @@ namespace Lesson_6
                         }
                     }
 
-                    attackUnitIndex = rundom.Next(unitsParty2.Length);
-                    defenceUnitIndex = rundom.Next(unitsParty1.Length);
+                    attackUnitIndex = random.Next(unitsParty2.Length);
+                    defenceUnitIndex = random.Next(unitsParty1.Length);
 
                     unitsParty2[attackUnitIndex].Attack(unitsParty1[defenceUnitIndex]);
                     if (unitsParty1[defenceUnitIndex].Health == 0)
@@ -114,7 +114,7 @@ namespace Lesson_6
 
                 for (int i = 0; i < quantity; i++)
                 {
-                    if (rundom.Next(2) == 1)
+                    if (random.Next(2) == 1)
                     {
                         units[i] = new Archer();
                     }
@@ -126,12 +126,12 @@ namespace Lesson_6
 
                 while (units.Length > 1)
                 {
-                    int attackUnitIndex = rundom.Next(units.Length);
-                    int defanceUnitIndex = rundom.Next(units.Length);
+                    int attackUnitIndex = random.Next(units.Length);
+                    int defanceUnitIndex = random.Next(units.Length);
 
                     while (defanceUnitIndex == attackUnitIndex)
                     {
-                        defanceUnitIndex = rundom.Next(units.Length);
+                        defanceUnitIndex = random.Next(units.Length);
                     }
 
                     units[attackUnitIndex].Attack(units[defanceUnitIndex]);
