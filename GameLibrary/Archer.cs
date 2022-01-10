@@ -13,7 +13,7 @@ namespace GameLibrary
         private const int CriticalAttackChance = 33;
         private const int CriticalRate = 2;
 
-        private Random rundom = new Random();
+        private Random random = new Random();
 
         public Archer() : base(HealthPoints, AtackDamage)
         {
@@ -21,7 +21,7 @@ namespace GameLibrary
 
         protected override double GetAttackRate()
         {
-            if (rundom.Next(0, 100) < CriticalAttackChance)
+            if (random.Next(0, 100) < CriticalAttackChance)
             {
                 return AtackDamage  * CriticalRate;
             }
@@ -33,7 +33,7 @@ namespace GameLibrary
 
         protected override double Defence(double atackRate)
         {
-            if (rundom.Next(0, 100) > DodgeFromAttack)
+            if (random.Next(0, 100) > DodgeFromAttack)
             {
                 return atackRate * DamageRate;
             }

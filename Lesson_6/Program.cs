@@ -89,12 +89,15 @@ namespace Lesson_6
                         }
                     }
 
-                    unitsParty2[defenceUnitIndex].Attack(unitsParty1[attackUnitIndex]);
-                    if (unitsParty1[attackUnitIndex].Health == 0)
+                    attackUnitIndex = rundom.Next(unitsParty2.Length);
+                    defenceUnitIndex = rundom.Next(unitsParty1.Length);
+
+                    unitsParty2[attackUnitIndex].Attack(unitsParty1[defenceUnitIndex]);
+                    if (unitsParty1[defenceUnitIndex].Health == 0)
                     {
-                        Console.WriteLine(unitsParty1[attackUnitIndex].ToString() +
-                            " from Group 1 was killed by " + unitsParty1[attackUnitIndex].ToString() + " from Group 2");
-                        unitsParty1 = RemoveDeadUnitFromGroup(attackUnitIndex, unitsParty1);
+                        Console.WriteLine(unitsParty1[defenceUnitIndex].ToString() +
+                            " from Group 1 was killed by " + unitsParty1[defenceUnitIndex].ToString() + " from Group 2");
+                        unitsParty1 = RemoveDeadUnitFromGroup(defenceUnitIndex, unitsParty1);
                         if (unitsParty1.Length == 0)
                         {
                             Console.WriteLine("Game over, Group 2 Win!");
@@ -132,7 +135,7 @@ namespace Lesson_6
                     }
 
                     units[attackUnitIndex].Attack(units[defanceUnitIndex]);
-                    if(units[defanceUnitIndex].Health == 0)
+                    if (units[defanceUnitIndex].Health == 0)
                     {
                         Console.WriteLine(units[defanceUnitIndex].ToString() + " was killed by " + units[attackUnitIndex].ToString());
                         units = RemoveDeadUnitFromGroup(defanceUnitIndex, units);

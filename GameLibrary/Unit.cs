@@ -4,16 +4,16 @@ namespace GameLibrary
 {
     public abstract class Unit
     {
-        private double HealthPoints;
-        private double AttackDamage;
+        private double _healthPoints;
+        private double _attackDamage;
 
-        public double Health => HealthPoints;  
-        public double Power => AttackDamage;
+        public double Health => _healthPoints;  
+        public double Power => _attackDamage;
 
         protected Unit(double health, double attack)
         {
-            this.HealthPoints = health;
-            this.AttackDamage = attack;
+            this._healthPoints = health;
+            this._attackDamage = attack;
         }
 
         protected abstract double GetAttackRate();
@@ -23,11 +23,11 @@ namespace GameLibrary
         public void Attack(Unit unit)
         {
             double currentAttack = GetAttackRate();
-            this.AttackDamage = currentAttack;
-            unit.HealthPoints -= unit.Defence(currentAttack);
-            if(unit.HealthPoints < 0)
+            this._attackDamage = currentAttack;
+            unit._healthPoints -= unit.Defence(currentAttack);
+            if(unit._healthPoints < 0)
             {
-                unit.HealthPoints = 0;
+                unit._healthPoints = 0;
             }
         }   
     }
