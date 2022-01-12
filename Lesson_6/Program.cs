@@ -17,8 +17,8 @@ namespace Lesson_6
             void Simulation1on1()
             {
 
-                Archer archer = new Archer();
-                Warior warior = new Warior();
+                Unit archer = new Archer();
+                Unit warior = new Warior();
                 int turn = 0;
 
                 if (random.Next(2) == 1)
@@ -30,7 +30,7 @@ namespace Lesson_6
                     warior.Attack(archer);
                     archer.Attack(warior);
 
-                    Console.WriteLine("Round " + turn + " archer health is " + archer.Health + " archer attack is " + archer.Power +
+                    Console.WriteLine("Round " + turn + " archer health is " + archer.Health + " archer attack is " + archer.CurrentAttackPower +
                         " Warior health is " + warior.Health);
                     turn++;
                 }

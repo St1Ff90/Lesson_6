@@ -8,7 +8,7 @@ namespace GameLibrary
         private double _attackDamage;
 
         public double Health => _healthPoints;  
-        public double Power => _attackDamage;
+        public double CurrentAttackPower => _attackDamage;
 
         protected Unit(double health, double attack)
         {
