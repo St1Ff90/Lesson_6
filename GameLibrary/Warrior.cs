@@ -25,6 +25,6 @@ namespace GameLibrary
             return atackRate * DefenceRate;
         }
 
-        public override string ToString() => "Warior";
+        public override string ToString() => nameof(Warior);
     }
 }
